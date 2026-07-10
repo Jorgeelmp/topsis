@@ -23,7 +23,7 @@
 
         <div
             class="hidden lg:flex lg:w-1/2 xl:w-[55%] relative overflow-hidden
-                    bg-gradient-to-br from-blue-900 via-blue-700 to-blue-600
+                    bg-blue-600
                     flex-col items-center justify-center px-12">
 
             <div class="absolute inset-0 opacity-10"

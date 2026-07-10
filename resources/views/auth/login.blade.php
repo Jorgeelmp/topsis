@@ -72,7 +72,7 @@
         </div>
 
         <button type="submit" id="login-submit"
-            class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-6 bg-gradient-to-br from-blue-600 to-blue-700 text-white font-semibold text-[15px] rounded-lg shadow-[0_4px_14px_0_rgba(37,99,235,0.35)] transition-all duration-150 hover:brightness-110 hover:-translate-y-[1px] hover:shadow-[0_6px_20px_0_rgba(37,99,235,0.4)] active:translate-y-0 active:shadow-[0_2px_8px_0_rgba(37,99,235,0.3)] disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none">
+            class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-6 bg-blue-600 text-white font-semibold text-[15px] rounded-lg shadow-[0_4px_14px_0_rgba(37,99,235,0.35)] transition-all duration-150 hover:brightness-110 hover:-translate-y-[1px] hover:shadow-[0_6px_20px_0_rgba(37,99,235,0.4)] active:translate-y-0 active:shadow-[0_2px_8px_0_rgba(37,99,235,0.3)] disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />

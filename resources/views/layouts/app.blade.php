@@ -28,12 +28,6 @@
         <div class="px-5 py-5 border-b border-slate-200">
             <a href="{{ url('/') }}"
                 class="inline-flex items-center gap-2.5 font-bold text-[1.1rem] text-blue-900 tracking-tight">
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
-                    <rect width="40" height="40" rx="10" fill="#2563eb" />
-                    <path d="M10 28 L20 12 L30 28" stroke="white" stroke-width="2.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <circle cx="20" cy="20" r="3" fill="white" />
-                </svg>
                 <span>TOPSIS</span>
             </a>
         </div>
@@ -97,7 +91,7 @@
             <div class="px-3 py-4 border-t border-slate-200">
                 <div class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-slate-50 transition-colors">
                     <div
-                        class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-700
+                        class="w-9 h-9 rounded-full bg-blue-600
                             flex items-center justify-center text-white font-bold text-sm shrink-0">
                         {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                     </div>
@@ -152,10 +146,10 @@
             </div>
         </header>
 
-        <main class="flex-1 py-8 px-6 max-w-full overflow-x-hidden">
+        <main class="flex-1 py-4 max-w-full overflow-x-hidden">
             @if (session('success'))
                 <div
-                    class="bg-green-50 border border-green-200 text-green-700 rounded-lg py-3 px-4 text-sm mb-5 flex items-center gap-2">
+                    class="max-w-5xl mx-auto bg-green-50 border border-green-200 text-green-700 rounded-lg py-3 px-4 text-sm mb-5 flex items-center gap-2">
                     <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                         stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -166,7 +160,7 @@
 
             @if (session('error'))
                 <div
-                    class="bg-red-50 border border-red-200 text-red-700 rounded-lg py-3 px-4 text-sm mb-5 flex items-center gap-2">
+                    class="max-w-5xl mx-auto bg-red-50 border border-red-200 text-red-700 rounded-lg py-3 px-4 text-sm mb-5 flex items-center gap-2">
                     <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                         stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
