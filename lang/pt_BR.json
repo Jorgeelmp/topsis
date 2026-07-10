@@ -195,5 +195,7 @@
   "Log in to your account": "Entrar na sua conta",
   "Enter your email and password below to log in": "Digite seu e-mail e senha abaixo para entrar",
   "Don't have an account?": "Não tem uma conta?",
-  "Login error": "As credenciais fornecidas não correspondem aos nossos registros."
+  "Login error": "As credenciais fornecidas não correspondem aos nossos registros.",
+  "You are already a professional": "Você já é um profissional.",
+  "You are now a professional on the platform!": "Agora você é um profissional na plataforma!"
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Enums\RolesEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +25,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended(route('profile'));
         }
 
         return back()->withErrors([
@@ -43,17 +44,22 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Password::defaults()],
+            'latitude' => ['required', 'numeric', 'between:-90,90'],
+            'longitude' => ['required', 'numeric', 'between:-180,180'],
         ]);
 
         $user = User::create([
+            'role' => RolesEnum::CLIENT,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
         ]);
 
         Auth::login($user);
 
-        return to_route('dashboard');
+        return to_route('profile');
     }
 
     public function logout(Request $request)
