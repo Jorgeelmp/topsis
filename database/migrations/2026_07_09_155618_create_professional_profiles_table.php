@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('professional_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('category');
+            $table->foreignId('service_category_id')->nullable()->constrained('service_categories')->nullOnDelete();
             $table->decimal('hourly_price', 8, 2)->nullable();
             $table->integer('response_time_hours')->nullable();
             $table->text('description')->nullable();

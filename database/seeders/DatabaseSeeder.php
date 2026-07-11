@@ -2,24 +2,42 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RolesEnum;
+use App\Models\ServiceCategory;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::firstOrCreate(
+            ['email' => 'admin@topsis.com'],
+            [
+                'name' => 'Administrador',
+                'password' => Hash::make('password'),
+                'role' => RolesEnum::ADMIN,
+                'latitude' => -28.702391492581,
+                'longitude' => -49.408516371623,
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $categories = [
+            'Diarista',
+            'Pedreiro',
+            'Pintor',
+            'Eletricista',
+            'Encanador',
+            'Marceneiro',
+            'Jardineiro',
+        ];
+
+        foreach ($categories as $name) {
+            ServiceCategory::firstOrCreate(['name' => $name]);
+        }
     }
 }

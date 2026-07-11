@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\RolesEnum;
 use App\Models\ProfessionalProfile;
+use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,9 @@ class ProfessionalController extends Controller
             return to_route('profile')->with('info', __('You are already a professional'));
         }
 
-        return view('professional.become');
+        $categories = ServiceCategory::orderBy('name')->get();
+
+        return view('professional.become', compact('categories'));
     }
 
     public function becomeProfessional(Request $request)
@@ -25,7 +28,7 @@ class ProfessionalController extends Controller
         }
 
         $request->validate([
-            'category' => ['required', 'string', 'max:255'],
+            'service_category_id' => ['required', 'integer', 'exists:service_categories,id'],
             'hourly_price' => ['required', 'numeric', 'min:0'],
             'response_time_hours' => ['required', 'integer', 'min:1'],
             'experience_years' => ['required', 'integer', 'min:0'],
@@ -35,7 +38,7 @@ class ProfessionalController extends Controller
 
         ProfessionalProfile::create([
             'user_id' => $user->id,
-            'category' => $request->category,
+            'service_category_id' => $request->service_category_id,
             'hourly_price' => $request->hourly_price,
             'response_time_hours' => $request->response_time_hours,
             'experience_years' => $request->experience_years,
