@@ -54,6 +54,24 @@
                     <p class="text-slate-800 font-medium">{{ $user->created_at->format('d/m/Y') }}</p>
                 </div>
             </div>
+
+            @if($user->latitude && $user->longitude)
+                <div class="px-8 pb-8">
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <div class="w-full h-64 bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                marginheight="0" 
+                                marginwidth="0" 
+                                src="https://maps.google.com/maps?q={{ $user->latitude }},{{ $user->longitude }}&z=15&output=embed"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </x-card>
 
         @if ($user->role === \App\Enums\RolesEnum::PROFESSIONAL && $user->professionalProfile)

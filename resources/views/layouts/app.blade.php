@@ -138,7 +138,7 @@
             </label>
 
             <div class="flex-1">
-                <h1 class="text-base font-semibold text-slate-900">@yield('page_heading', 'Dashboard')</h1>
+                <h1 class="text-sm sm:text-base font-semibold text-slate-900 truncate">@yield('page_heading', 'Dashboard')</h1>
             </div>
 
             <div class="flex items-center gap-3">

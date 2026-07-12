@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\Gate;
 
 class CriteriaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize('admin');
 
-        $criterias = Criteria::orderBy('name')->get();
+        $criterias = Criteria::query()
+            ->when($request->search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->orderBy('name')
+            ->paginate(10);
 
         return view('criteria.index', compact('criterias'));
     }

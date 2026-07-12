@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\Gate;
 
 class ServiceCategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize('admin');
 
-        $categories = ServiceCategory::orderBy('name')->get();
+        $categories = ServiceCategory::query()
+            ->when($request->search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->orderBy('name')
+            ->paginate(10);
 
         return view('service-category.index', compact('categories'));
     }
