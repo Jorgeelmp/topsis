@@ -25,7 +25,11 @@
                     placeholder="Ex: Experiência, Preço, Tempo de Resposta..." :required="true"
                     hint="Descreva o que esse critério avalia no profissional." />
 
-                <x-form-slider label="Peso Padrão do Critério" name="weight" value="0" min="0" max="1" step="0.01" :required="true"
+                <x-form-select label="Tipo do Critério" name="type" :options="App\Enums\CriteriaTypeEnum::cases()" :required="true"
+                    hint="Selecione se o critério é de custo ou benefício." />
+
+                <x-form-slider label="Peso Padrão do Critério" name="weight" value="0" min="0" max="1"
+                    step="0.01" :required="true"
                     hint="Define a importância deste critério no cálculo TOPSIS. Valores próximos de 1 têm maior influência." />
 
                 <div class="pt-4 border-t border-slate-100 flex justify-end gap-3">

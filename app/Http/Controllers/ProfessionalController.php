@@ -32,6 +32,8 @@ class ProfessionalController extends Controller
             'hourly_price' => ['required', 'numeric', 'min:0'],
             'response_time_hours' => ['required', 'integer', 'min:1'],
             'experience_years' => ['required', 'integer', 'min:0'],
+            'reviews_count' => ['required', 'integer', 'min:0'],
+            'acceptance_rate' => ['required', 'numeric', 'min:0', 'max:100'],
         ]);
 
         $user = Auth::user();
@@ -42,6 +44,8 @@ class ProfessionalController extends Controller
             'hourly_price' => $request->hourly_price,
             'response_time_hours' => $request->response_time_hours,
             'experience_years' => $request->experience_years,
+            'reviews_count' => $request->reviews_count,
+            'acceptance_rate' => $request->acceptance_rate,
         ]);
 
         $user->role = RolesEnum::PROFESSIONAL;

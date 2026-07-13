@@ -18,13 +18,13 @@
             <form action="{{ route('professional.become') }}" method="POST" class="space-y-6">
                 @csrf
 
-                <x-form-select label="Categoria de Serviço" name="service_category_id" :options="$categories"
-                    :required="true" placeholder="Selecione a sua especialidade..."
+                <x-form-select label="Categoria de Serviço" name="service_category_id" :options="$categories" :required="true"
+                    placeholder="Selecione a sua especialidade..." :searchable="true"
                     hint="Escolha a categoria que melhor representa o seu serviço." />
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <x-form-input label="Preço Base (R$/Hora)" name="hourly_price" type="number" step="0.01" placeholder="0.00"
-                        prefix="R$" :required="true" hint="Critério de custo no TOPSIS." />
+                    <x-form-input label="Preço Base (R$/Hora)" name="hourly_price" type="number" step="0.01"
+                        placeholder="0.00" prefix="R$" :required="true" hint="Critério de custo no TOPSIS." />
 
                     <x-form-input label="Experiência (Anos)" name="experience_years" type="number" placeholder="Ex: 5"
                         :required="true" hint="Critério de benefício no TOPSIS." />
@@ -33,6 +33,15 @@
                 <x-form-input label="Tempo de Resposta Médio (Minutos)" name="response_time_hours" type="number"
                     placeholder="Ex: 2" :required="true"
                     hint="Estimativa de quanto tempo você demora para responder um cliente. Critério de custo no TOPSIS." />
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <x-form-input label="Quantidade de Avaliações" name="reviews_count" type="number" placeholder="Ex: 10"
+                        :required="true" hint="Número total de avaliações do profissional na plataforma." />
+
+                    <x-form-input label="Taxa de Aceitação (%)" name="acceptance_rate" type="number" step="0.01"
+                        placeholder="Ex: 95.5" :required="true"
+                        hint="Porcentagem de serviços aceitos pelo profissional." />
+                </div>
 
                 <div class="pt-4 border-t border-slate-100 flex justify-end gap-3">
                     <x-btn-secondary href="{{ route('profile') }}">

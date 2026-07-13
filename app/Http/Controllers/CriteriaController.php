@@ -36,6 +36,7 @@ class CriteriaController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'weight' => ['required', 'numeric', 'between:0,1'],
+            'type' => ['required', 'string', 'in:cost,benefit'],
         ]);
 
         Criteria::create($validated);
@@ -58,6 +59,7 @@ class CriteriaController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'weight' => ['required', 'numeric', 'between:0,1'],
+            'type' => ['required', 'string', 'in:cost,benefit'],
         ]);
 
         $criteria->update($validated);
