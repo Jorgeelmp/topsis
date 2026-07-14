@@ -55,19 +55,13 @@
                 </div>
             </div>
 
-            @if($user->latitude && $user->longitude)
+            @if ($user->latitude && $user->longitude)
                 <div class="px-8 pb-8">
                     <div class="mt-4 pt-4 border-t border-slate-100">
                         <div class="w-full h-64 bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
-                            <iframe 
-                                width="100%" 
-                                height="100%" 
-                                frameborder="0" 
-                                scrolling="no" 
-                                marginheight="0" 
-                                marginwidth="0" 
-                                src="https://maps.google.com/maps?q={{ $user->latitude }},{{ $user->longitude }}&z=15&output=embed"
-                            ></iframe>
+                            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0"
+                                marginwidth="0"
+                                src="https://maps.google.com/maps?q={{ $user->latitude }},{{ $user->longitude }}&z=15&output=embed"></iframe>
                         </div>
                     </div>
                 </div>
@@ -110,13 +104,51 @@
                     </div>
                     <div>
                         <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">Tempo de Resposta</p>
-                        <p class="text-slate-800 font-medium">{{ $user->professionalProfile->response_time_hours }}
-                            {{ $user->professionalProfile->response_time_hours == 1 ? 'hora' : 'horas' }}
+                        <p class="text-slate-800 font-medium">{{ $user->professionalProfile->response_time }}
+                            {{ $user->professionalProfile->response_time == 1 ? 'minuto' : 'minutos' }}
                         </p>
+                    </div>
+
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">Avaliações</p>
+                        @if ($user->professionalProfile->reviews_count > 0)
+                            <p class="text-slate-800 font-medium">
+                                {{ $user->professionalProfile->reviews_count }}
+                                {{ $user->professionalProfile->reviews_count == 1 ? 'avaliação' : 'avaliações' }}
+                            </p>
+                        @else
+                            <p class="text-slate-400 text-sm">Nenhuma avaliação ainda</p>
+                        @endif
+                    </div>
+
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">Média de Notas</p>
+                        @if ($user->professionalProfile->average_rating !== null)
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="text-slate-800 font-semibold text-lg">{{ number_format($user->professionalProfile->average_rating, 1, ',', '') }}</span>
+                                <div class="flex items-center gap-0.5">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= round($user->professionalProfile->average_rating))
+                                            <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                            </svg>
+                                        @else
+                                            <svg class="w-4 h-4 text-slate-200" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                            </svg>
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>
+                        @else
+                            <p class="text-slate-400 text-sm">—</p>
+                        @endif
                     </div>
                 </div>
             </x-card>
-
         @elseif($user->role === \App\Enums\RolesEnum::CLIENT)
             <x-alert-info title="Você ainda não divulga serviços"
                 message='Clique em "Quero divulgar meus serviços" no topo da página para se cadastrar como profissional e aparecer nas recomendações TOPSIS.' />

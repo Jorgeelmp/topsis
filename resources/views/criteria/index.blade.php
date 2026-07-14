@@ -119,7 +119,7 @@
             </div>
 
             @if ($criterias->hasPages())
-                <div class="px-8 py-4 border-t border-slate-200">
+                <div class="px-8 py-4 mt-8 border-t border-slate-200">
                     {{ $criterias->withQueryString()->links() }}
                 </div>
             @endif

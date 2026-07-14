@@ -96,7 +96,7 @@
             </div>
 
             @if($categories->hasPages())
-                <div class="px-8 py-4 border-t border-slate-200">
+                <div class="px-8 py-4 mt-8 border-t border-slate-200">
                     {{ $categories->withQueryString()->links() }}
                 </div>
             @endif

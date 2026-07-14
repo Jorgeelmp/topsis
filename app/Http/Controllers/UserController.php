@@ -20,8 +20,11 @@ class UserController extends Controller
 
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
-        return view('user.show', compact('user'));
+        $user = User::with('professionalProfile.reviews', 'professionalProfile.serviceCategory')->findOrFail($id);
+        $profile = $user->professionalProfile;
+        $reviewsCount = $profile->reviews_count;
+        $averageRating = $profile->average_rating;
+        return view('user.show', compact('user', 'profile', 'reviewsCount', 'averageRating'));
     }
 
     public function destroy(string $id)

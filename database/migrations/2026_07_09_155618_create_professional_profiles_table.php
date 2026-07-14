@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('service_category_id')->nullable()->constrained('service_categories')->nullOnDelete();
             $table->decimal('hourly_price', 8, 2)->nullable();
-            $table->integer('response_time_hours')->nullable();
+            $table->integer('response_time')->nullable();
             $table->text('description')->nullable();
             $table->integer('experience_years')->nullable();
             $table->timestamps();

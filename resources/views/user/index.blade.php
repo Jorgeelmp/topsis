@@ -101,7 +101,7 @@
             </div>
 
             @if($users->hasPages())
-                <div class="px-8 py-4 border-t border-slate-200">
+                <div class="px-8 py-4 mt-8 border-t border-slate-200">
                     {{ $users->withQueryString()->links() }}
                 </div>
             @endif

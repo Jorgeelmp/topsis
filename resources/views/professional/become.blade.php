@@ -30,7 +30,7 @@
                         :required="true" hint="Critério de benefício no TOPSIS." />
                 </div>
 
-                <x-form-input label="Tempo de Resposta Médio (Minutos)" name="response_time_hours" type="number"
+                <x-form-input label="Tempo de Resposta Médio (Minutos)" name="response_time" type="number"
                     placeholder="Ex: 2" :required="true"
                     hint="Estimativa de quanto tempo você demora para responder um cliente. Critério de custo no TOPSIS." />
 

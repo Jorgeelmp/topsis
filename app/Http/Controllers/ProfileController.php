@@ -8,7 +8,7 @@ class ProfileController extends Controller
 {
     public function show()
     {
-        $user = Auth::user()->load('professionalProfile');
+        $user = Auth::user()->load('professionalProfile.reviews', 'professionalProfile.serviceCategory');
 
         return view('profile.show', compact('user'));
     }

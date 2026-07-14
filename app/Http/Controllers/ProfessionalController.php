@@ -30,9 +30,8 @@ class ProfessionalController extends Controller
         $request->validate([
             'service_category_id' => ['required', 'integer', 'exists:service_categories,id'],
             'hourly_price' => ['required', 'numeric', 'min:0'],
-            'response_time_hours' => ['required', 'integer', 'min:1'],
+            'response_time' => ['required', 'integer', 'min:1'],
             'experience_years' => ['required', 'integer', 'min:0'],
-            'reviews_count' => ['required', 'integer', 'min:0'],
             'acceptance_rate' => ['required', 'numeric', 'min:0', 'max:100'],
         ]);
 
@@ -42,9 +41,8 @@ class ProfessionalController extends Controller
             'user_id' => $user->id,
             'service_category_id' => $request->service_category_id,
             'hourly_price' => $request->hourly_price,
-            'response_time_hours' => $request->response_time_hours,
+            'response_time' => $request->response_time,
             'experience_years' => $request->experience_years,
-            'reviews_count' => $request->reviews_count,
             'acceptance_rate' => $request->acceptance_rate,
         ]);
 
