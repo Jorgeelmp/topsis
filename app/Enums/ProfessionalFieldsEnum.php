@@ -10,6 +10,7 @@ enum ProfessionalFieldsEnum: string
     case ACCEPTANCE_RATE = 'acceptance_rate';
     case REVIEWS_COUNT = 'reviews_count';
     case AVERAGE_RATING = 'average_rating';
+    case DISTANCE = 'distance';
 
     public function label(): string
     {
@@ -20,6 +21,7 @@ enum ProfessionalFieldsEnum: string
             self::ACCEPTANCE_RATE => 'Taxa de Aceite',
             self::REVIEWS_COUNT => 'Quantidade de Avaliações',
             self::AVERAGE_RATING => 'Nota Média das Avaliações',
+            self::DISTANCE => 'Distância',
         };
     }
 }
