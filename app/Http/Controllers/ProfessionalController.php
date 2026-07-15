@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\GetProfessionalsAction;
 use App\Enums\RolesEnum;
+use App\Models\Criteria;
 use App\Models\ProfessionalProfile;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
@@ -10,6 +12,18 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfessionalController extends Controller
 {
+    public function index(Request $request, GetProfessionalsAction $getProfessionalsAction)
+    {
+        $categories = ServiceCategory::orderBy('name')->get();
+        $selectedCategory = $request->input('category_id');
+        $weights = $request->input('weights', []);
+        $criterias = Criteria::all();
+
+        $professionals = $getProfessionalsAction->execute($selectedCategory, $weights);
+
+        return view('professional.index', compact('categories', 'professionals', 'selectedCategory', 'criterias'));
+    }
+
     public function showBecomeProfessionalForm()
     {
         if (Auth::user()->role === RolesEnum::PROFESSIONAL) {

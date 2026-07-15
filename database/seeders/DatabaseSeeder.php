@@ -102,6 +102,19 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        $criterias = [
+            ['name' => 'Valor/Hora', 'type' => 'cost', 'weight' => 0.3, 'professional_field' => 'hourly_price'],
+            ['name' => 'Tempo de Resposta', 'type' => 'cost', 'weight' => 0.1, 'professional_field' => 'response_time'],
+            ['name' => 'Anos de Experiência', 'type' => 'benefit', 'weight' => 0.2, 'professional_field' => 'experience_years'],
+            ['name' => 'Taxa de Aceite', 'type' => 'benefit', 'weight' => 0.15, 'professional_field' => 'acceptance_rate'],
+            ['name' => 'Quantidade de Avaliações', 'type' => 'benefit', 'weight' => 0.05, 'professional_field' => 'reviews_count'],
+            ['name' => 'Nota Média das Avaliações', 'type' => 'benefit', 'weight' => 0.2, 'professional_field' => 'average_rating'],
+        ];
+
+        foreach ($criterias as $criteria) {
+            \App\Models\Criteria::firstOrCreate(['professional_field' => $criteria['professional_field']], $criteria);
+        }
+
         $this->command->info('Seeder concluído!');
         $this->command->table(
             ['Tipo', 'Quantidade'],

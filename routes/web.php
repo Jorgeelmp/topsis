@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 
     Route::controller(ProfessionalController::class)->group(function () {
+        Route::get('/search', [ProfessionalController::class, 'index'])->name('professionals.search');
         Route::get('/become-professional', [ProfessionalController::class, 'showBecomeProfessionalForm'])->name('professional.become');
         Route::post('/become-professional', [ProfessionalController::class, 'becomeProfessional']);
     });

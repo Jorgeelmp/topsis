@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProfessionalFieldsEnum;
 use App\Models\Criteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class CriteriaController extends Controller
 {
@@ -35,6 +37,7 @@ class CriteriaController extends Controller
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'professional_field' => ['required', Rule::enum(ProfessionalFieldsEnum::class)],
             'weight' => ['required', 'numeric', 'between:0,1'],
             'type' => ['required', 'string', 'in:cost,benefit'],
         ]);
@@ -58,6 +61,7 @@ class CriteriaController extends Controller
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'professional_field' => ['required', Rule::enum(ProfessionalFieldsEnum::class)],
             'weight' => ['required', 'numeric', 'between:0,1'],
             'type' => ['required', 'string', 'in:cost,benefit'],
         ]);

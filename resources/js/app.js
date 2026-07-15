@@ -71,4 +71,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    const openModalButtons = document.querySelectorAll('[data-modal-open]');
+    const closeModalButtons = document.querySelectorAll('[data-modal-close], [data-modal-backdrop]');
+
+    openModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const modalId = button.dataset.modalOpen;
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+
+                setTimeout(() => {
+                    modal.querySelector('[data-modal-backdrop]').classList.remove('opacity-0');
+                    const panel = modal.querySelector('[data-modal-panel]');
+                    panel.classList.remove('opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95');
+                }, 10);
+            }
+        });
+    });
+
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const modal = e.target.closest('[data-modal]');
+            if (modal) {
+                modal.querySelector('[data-modal-backdrop]').classList.add('opacity-0');
+                const panel = modal.querySelector('[data-modal-panel]');
+                panel.classList.add('opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95');
+
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        });
+    });
 });

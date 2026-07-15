@@ -25,6 +25,9 @@
                     placeholder="Ex: Experiência, Preço, Tempo de Resposta..." :required="true"
                     hint="Descreva o que esse critério avalia no profissional." />
 
+                <x-form-select label="Campo do Profissional" name="professional_field" :options="App\Enums\ProfessionalFieldsEnum::cases()" :required="true"
+                    hint="Selecione qual campo do profissional este critério avalia." />
+
                 <x-form-select label="Tipo do Critério" name="type" :options="App\Enums\CriteriaTypeEnum::cases()" :required="true"
                     hint="Selecione se o critério é de custo ou benefício." />
 
