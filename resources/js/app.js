@@ -105,4 +105,64 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    const criteriaWeightsModal = document.getElementById('criteria-weights-modal');
+    if (criteriaWeightsModal) {
+        const sliders = criteriaWeightsModal.querySelectorAll('input[type="range"]');
+        const totalDisplay = document.getElementById('weights-total');
+        const errorText = document.getElementById('weights-error');
+        const applyBtn = document.getElementById('apply-weights-btn');
+        const searchForm = document.getElementById('search-form');
+
+        function updateWeightsTotal() {
+            let sum = 0;
+            sliders.forEach(slider => {
+                sum += parseFloat(slider.value) || 0;
+            });
+
+            if (totalDisplay) totalDisplay.textContent = sum.toFixed(2);
+
+            const isValid = Math.abs(sum - 1.0) < 0.001;
+
+            if (isValid) {
+                if (totalDisplay) {
+                    totalDisplay.classList.remove('text-red-600');
+                    totalDisplay.classList.add('text-slate-900');
+                }
+                if (errorText) errorText.classList.add('hidden');
+                if (applyBtn) {
+                    applyBtn.disabled = false;
+                    applyBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            } else {
+                if (totalDisplay) {
+                    totalDisplay.classList.remove('text-slate-900');
+                    totalDisplay.classList.add('text-red-600');
+                }
+                if (errorText) errorText.classList.remove('hidden');
+                if (applyBtn) {
+                    applyBtn.disabled = true;
+                    applyBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            }
+
+            return isValid;
+        }
+
+        sliders.forEach(slider => {
+            slider.addEventListener('input', updateWeightsTotal);
+        });
+
+        updateWeightsTotal();
+
+        if (searchForm) {
+            searchForm.addEventListener('submit', function (e) {
+                if (!updateWeightsTotal()) {
+                    e.preventDefault();
+                    criteriaWeightsModal.classList.remove('hidden');
+                    alert("A soma dos pesos dos critérios deve ser exatamente 1.00.");
+                }
+            });
+        }
+    }
 });

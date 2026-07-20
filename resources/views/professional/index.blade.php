@@ -7,7 +7,7 @@
     <x-card class="mb-6 !overflow-visible">
         <h2 class="text-lg font-semibold text-slate-800 mb-4">Selecione a categoria abaixo para aplicar a busca de
             profissionais:</h2>
-        <form method="GET" action="{{ route('professionals.search') }}" class="flex flex-col gap-4">
+        <form method="GET" action="{{ route('professionals.search') }}" class="flex flex-col gap-4" id="search-form">
             @if ($categories->count() <= 5)
                 <div class="flex flex-wrap gap-2 items-center">
                     @foreach ($categories as $category)
@@ -70,7 +70,7 @@
                 <div class="space-y-6">
                     <p class="text-sm text-slate-600">Ajuste a importância de cada critério para o cálculo da recomendação.
                         Os valores alterados aqui serão aplicados na próxima busca.</p>
-                    <div class="space-y-5">
+                    <div class="space-y-5" id="criteria-sliders">
                         @foreach ($criterias as $criteria)
                             <x-form-slider name="weights[{{ $criteria->id }}]" :label="$criteria->name" :value="request()->input('weights.' . $criteria->id, $criteria->weight)"
                                 min="0" max="1" step="0.01" />
@@ -78,9 +78,19 @@
                     </div>
                 </div>
                 <x-slot:footer>
-                    <x-btn-primary type="button" data-modal-close>
-                        Aplicar e Fechar
-                    </x-btn-primary>
+                    <div class="flex items-center justify-between w-full">
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium text-slate-700">Soma:</span>
+                                <span id="weights-total" class="text-sm font-bold text-slate-900">0.00</span>
+                            </div>
+                            <p id="weights-error" class="text-xs text-red-600 hidden mt-0.5 m-0">A soma deve ser exata a
+                                1.00.</p>
+                        </div>
+                        <x-btn-primary type="button" data-modal-close id="apply-weights-btn">
+                            Aplicar e Fechar
+                        </x-btn-primary>
+                    </div>
                 </x-slot:footer>
             </x-modal>
         </form>

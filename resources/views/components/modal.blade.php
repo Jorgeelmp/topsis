@@ -6,9 +6,9 @@
 
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 w-full {{ $width }} opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-xl transition-all sm:my-8 w-full {{ $width }} opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 flex flex-col max-h-[90vh]"
                 data-modal-panel>
-                <div class="bg-white px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                <div class="bg-white px-6 py-4 border-b border-slate-100 flex items-center justify-between shrink-0">
                     <h3 class="text-lg font-semibold text-slate-900" id="modal-title">
                         {{ $title }}
                     </h3>
@@ -21,12 +21,12 @@
                     </button>
                 </div>
 
-                <div class="px-6 py-6">
+                <div class="px-6 py-6 overflow-y-auto flex-1">
                     {{ $slot }}
                 </div>
 
                 @isset($footer)
-                    <div class="bg-slate-50 px-6 py-4 flex justify-end gap-3 border-t border-slate-100">
+                    <div class="bg-slate-50 px-6 py-4 flex justify-end gap-3 border-t border-slate-100 shrink-0">
                         {{ $footer }}
                     </div>
                 @endisset
