@@ -45,7 +45,7 @@
                             placeholder="Todas as categorias" :searchable="true" />
                     </div>
                     <button type="button"
-                        class="px-4 py-2.5 bg-white text-slate-700 rounded-lg border border-slate-300 shadow-sm hover:bg-slate-50 transition-colors flex items-center gap-2 font-medium shrink-0 w-full sm:w-auto justify-center"
+                        class="px-4 py-2 bg-white text-slate-700 rounded-lg border border-slate-300 shadow-sm hover:bg-slate-50 transition-colors flex items-center gap-2 font-medium shrink-0 w-full sm:w-auto justify-center"
                         data-modal-open="criteria-weights-modal">
                         <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             stroke-width="2">
