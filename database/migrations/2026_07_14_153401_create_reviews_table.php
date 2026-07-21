@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('reviewer_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('reviewed_user_id')->constrained('users')->onDelete('cascade');
-            $table->tinyInteger('rating')->unsigned();
+            $table->float('rating')->unsigned();
             $table->text('comment')->nullable();
             $table->timestamps();
 
