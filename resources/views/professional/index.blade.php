@@ -96,24 +96,38 @@
         </form>
     </x-card>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        @forelse($professionals as $professional)
-            <x-professional-card :professional="$professional" />
-        @empty
-            <x-card class="col-span-1 md:col-span-2 text-center" padding="p-8">
-                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2m8-10a4 4 0 100-8 4 4 0 000 8z" />
-                    </svg>
-                </div>
-                <h3 class="text-lg font-medium text-slate-900">Nenhum profissional encontrado</h3>
-                <p class="text-slate-500 mt-1">Tente selecionar outra categoria ou limpar os filtros.</p>
-            </x-card>
-        @endforelse
-    </div>
+    @if (!$isSearch)
+        <x-card class="col-span-1 md:col-span-2 text-center" padding="p-12">
+            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-medium text-slate-900">Encontre o profissional ideal</h3>
+            <p class="text-slate-500 mt-2 max-w-md mx-auto">Selecione uma categoria e aplique os filtros de critério
+                desejados, depois clique em "Buscar" para listar as melhores opções para você.</p>
+        </x-card>
+    @else
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @forelse($professionals as $professional)
+                <x-professional-card :professional="$professional" />
+            @empty
+                <x-card class="col-span-1 md:col-span-2 text-center" padding="p-8">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2m8-10a4 4 0 100-8 4 4 0 000 8z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-slate-900">Nenhum profissional encontrado</h3>
+                    <p class="text-slate-500 mt-1">Tente selecionar outra categoria ou limpar os filtros.</p>
+                </x-card>
+            @endforelse
+        </div>
 
-    <div class="mt-8">
-        {{ $professionals->links() }}
-    </div>
+        <div class="mt-8">
+            {{ $professionals->links() }}
+        </div>
+    @endif
 @endsection

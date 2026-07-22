@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\CriteriaTypeEnum;
+use App\Enums\ProfessionalFieldsEnum;
 use App\Enums\RolesEnum;
 use App\Models\Criteria;
 use App\Models\ProfessionalProfile;
@@ -104,13 +106,13 @@ class DatabaseSeeder extends Seeder
         }
 
         $criterias = [
-            ['name' => 'Valor/Hora', 'type' => 'cost', 'weight' => 0.25, 'professional_field' => 'hourly_price'],
-            ['name' => 'Tempo de Resposta', 'type' => 'cost', 'weight' => 0.1, 'professional_field' => 'response_time'],
-            ['name' => 'Anos de Experiência', 'type' => 'benefit', 'weight' => 0.2, 'professional_field' => 'experience_years'],
-            ['name' => 'Taxa de Aceite', 'type' => 'benefit', 'weight' => 0.15, 'professional_field' => 'acceptance_rate'],
-            ['name' => 'Quantidade de Avaliações', 'type' => 'benefit', 'weight' => 0.05, 'professional_field' => 'reviews_count'],
-            ['name' => 'Nota Média das Avaliações', 'type' => 'benefit', 'weight' => 0.2, 'professional_field' => 'average_rating'],
-            ['name' => 'Distância', 'type' => 'cost', 'weight' => 0.05, 'professional_field' => 'distance'],
+            ['name' => 'Valor/Hora', 'type' => CriteriaTypeEnum::COST, 'weight' => 0.25, 'professional_field' => ProfessionalFieldsEnum::HOURLY_PRICE],
+            ['name' => 'Tempo de Resposta', 'type' => CriteriaTypeEnum::COST, 'weight' => 0.1, 'professional_field' => ProfessionalFieldsEnum::RESPONSE_TIME],
+            ['name' => 'Anos de Experiência', 'type' => CriteriaTypeEnum::BENEFIT, 'weight' => 0.2, 'professional_field' => ProfessionalFieldsEnum::EXPERIENCE_YEARS],
+            ['name' => 'Taxa de Aceite', 'type' => CriteriaTypeEnum::BENEFIT, 'weight' => 0.15, 'professional_field' => ProfessionalFieldsEnum::ACCEPTANCE_RATE],
+            ['name' => 'Quantidade de Avaliações', 'type' => CriteriaTypeEnum::BENEFIT, 'weight' => 0.05, 'professional_field' => ProfessionalFieldsEnum::REVIEWS_COUNT],
+            ['name' => 'Nota Média das Avaliações', 'type' => CriteriaTypeEnum::BENEFIT, 'weight' => 0.2, 'professional_field' => ProfessionalFieldsEnum::AVERAGE_RATING],
+            ['name' => 'Distância', 'type' => CriteriaTypeEnum::COST, 'weight' => 0.05, 'professional_field' => ProfessionalFieldsEnum::DISTANCE],
         ];
 
         foreach ($criterias as $criteria) {

@@ -19,9 +19,11 @@ class ProfessionalController extends Controller
         $weights = $request->input('weights', []);
         $criterias = Criteria::all();
 
-        $professionals = $getProfessionalsAction->execute($selectedCategory, $weights);
+        $isSearch = $request->has('category_id') || $request->has('weights');
+        
+        $professionals = $isSearch ? $getProfessionalsAction->execute($selectedCategory, $weights) : null;
 
-        return view('professional.index', compact('categories', 'professionals', 'selectedCategory', 'criterias'));
+        return view('professional.index', compact('categories', 'professionals', 'selectedCategory', 'criterias', 'isSearch'));
     }
 
     public function showBecomeProfessionalForm()

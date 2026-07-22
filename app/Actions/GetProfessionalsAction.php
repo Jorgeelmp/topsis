@@ -2,7 +2,10 @@
 
 namespace App\Actions;
 
+use App\Enums\CriteriaTypeEnum;
+use App\Models\Criteria;
 use App\Models\ProfessionalProfile;
+use BackedEnum;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -22,8 +25,14 @@ class GetProfessionalsAction
         // Segundo passo: Normalização da matriz
         $normalizedMatrix = self::normalizeMatrix($decisionMatrix);
 
-        // @TODO: Implementar os próximos passos do TOPSIS.
-        dd('Passo 2: Matriz Normalizada', $normalizedMatrix);
+        // Terceiro passo: Matriz ponderada
+        $weightedMatrix = self::applyWeights($normalizedMatrix, $weights);
+
+        // Quarto passo: Soluções ideais positiva e negativa
+        $idealSolutions = self::calculateIdealSolutions($weightedMatrix);
+
+        // @TODO: implementar o cálculo da distância euclidiana e a classificação final dos profissionais com base na pontuação TOPSIS
+        dd('Passo 4: Soluções Ideais (Positiva e Negativa)', $idealSolutions);
 
         return $query->paginate(10)->withQueryString();
     }
@@ -81,5 +90,72 @@ class GetProfessionalsAction
         }
 
         return $normalizedMatrix;
+    }
+
+    public static function applyWeights(array $normalizedMatrix, array $userWeights = []): array
+    {
+        if (empty($normalizedMatrix)) {
+            return [];
+        }
+
+        $criterias = Criteria::all();
+
+        $weightsByField = [];
+        foreach ($criterias as $criteria) {
+            $field = $criteria->professional_field->value;
+
+            $weight = $userWeights[$criteria->id];
+            $weightsByField[$field] = (float) $weight;
+        }
+
+        $weightedMatrix = [];
+        foreach ($normalizedMatrix as $professionalId => $professionalCriteriaValues) {
+            foreach ($professionalCriteriaValues as $criterionName => $normalizedValue) {
+                $weight = $weightsByField[$criterionName];
+
+                // v_ij = r_ij * w_j
+                $weightedMatrix[$professionalId][$criterionName] = $normalizedValue * $weight;
+            }
+        }
+
+        return $weightedMatrix;
+    }
+
+    public static function calculateIdealSolutions(array $weightedMatrix): array
+    {
+        if (empty($weightedMatrix)) {
+            return ['positive' => [], 'negative' => []];
+        }
+
+        $criterias = Criteria::all();
+        $typeByField = [];
+
+        foreach ($criterias as $criteria) {
+            $field = $criteria->professional_field->value;
+            $typeByField[$field] = $criteria->type;
+        }
+
+        $idealPositive = [];
+        $idealNegative = [];
+
+        $criteriaNames = array_keys(reset($weightedMatrix));
+
+        foreach ($criteriaNames as $criterionName) {
+            $values = array_column($weightedMatrix, $criterionName);
+            $type = $typeByField[$criterionName];
+
+            if ($type == CriteriaTypeEnum::BENEFIT) {
+                $idealPositive[$criterionName] = max($values);
+                $idealNegative[$criterionName] = min($values);
+            } else {
+                $idealPositive[$criterionName] = min($values);
+                $idealNegative[$criterionName] = max($values);
+            }
+        }
+
+        return [
+            'positive' => $idealPositive,
+            'negative' => $idealNegative,
+        ];
     }
 }
