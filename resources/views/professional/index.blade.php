@@ -56,7 +56,7 @@
                     </button>
                     @if (request()->has('category_id') || request()->has('weights'))
                         <a href="{{ route('professionals.search') }}"
-                            class="px-4 py-2.5 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-colors shrink-0 w-full sm:w-auto text-center font-medium">
+                            class="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-colors shrink-0 w-full sm:w-auto text-center font-medium">
                             Limpar
                         </a>
                     @endif
