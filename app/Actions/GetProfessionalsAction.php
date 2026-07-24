@@ -70,6 +70,7 @@ class GetProfessionalsAction
             $profLon = $professional->user->longitude ?? null;
 
             $distance = self::calculateHaversineDistance($userLat, $userLon, $profLat, $profLon);
+            $professional->distance_to_user = $distance;
 
             $decisionMatrix[$professional->id] = [
                 'hourly_price' => (float) $professional->hourly_price,

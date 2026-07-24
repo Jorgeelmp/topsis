@@ -31,6 +31,12 @@
                 <span class="block text-slate-500 text-xs font-medium mb-0.5">Tempo Resposta</span>
                 <span class="font-semibold text-slate-800">{{ $professional->response_time }} min</span>
             </div>
+            @if(isset($professional->distance_to_user) && $professional->distance_to_user < 999)
+            <div>
+                <span class="block text-slate-500 text-xs font-medium mb-0.5">Distância</span>
+                <span class="font-semibold text-slate-800">{{ number_format($professional->distance_to_user, 1, ',', '.') }} km</span>
+            </div>
+            @endif
         </div>
 
         <div class="sm:border-l sm:border-slate-100 sm:pl-6 flex flex-col items-center justify-center shrink-0">
