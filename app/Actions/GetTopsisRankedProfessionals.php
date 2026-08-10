@@ -8,7 +8,7 @@ use App\Models\ProfessionalProfile;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class GetProfessionalsAction
+class GetTopsisRankedProfessionals
 {
     public function execute(?int $categoryId = null, array $weights = []): LengthAwarePaginator
     {

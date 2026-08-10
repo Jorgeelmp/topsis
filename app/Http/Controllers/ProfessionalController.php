@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\GetProfessionalsAction;
+use App\Actions\GetTopsisRankedProfessionals;
 use App\Enums\RolesEnum;
 use App\Models\Criteria;
 use App\Models\ProfessionalProfile;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfessionalController extends Controller
 {
-    public function index(Request $request, GetProfessionalsAction $getProfessionalsAction)
+    public function index(Request $request, GetTopsisRankedProfessionals $getProfessionalsAction)
     {
         $categories = ServiceCategory::orderBy('name')->get();
         $selectedCategory = $request->input('category_id');
