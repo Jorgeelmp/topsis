@@ -20,7 +20,7 @@ class GetTopsisRankedProfessionals
 
         $professionals = $query->get();
 
-        // Primeiro passo do TOPSIS: Criar a matriz de decisão com valores crus
+        // Primeiro passo do TOPSIS: Criar a matriz de decisão com valores originais
         $decisionMatrix = self::createDecisionMatrix($professionals);
 
         // Segundo passo: Normalização da matriz
