@@ -70,6 +70,27 @@ class HwangYoonTopsisReferenceTest extends TestCase
         }
 
         $this->assertSame(['A1', 'A3', 'A4', 'A2'], array_keys($result['scores']));
+
+        $output = PHP_EOL . "Scores calculados" . PHP_EOL;
+        $output .= "Alternativa  Hwang e Yoon  Implementação  Diferença  Posição" . PHP_EOL;
+        foreach ($expectedScores as $alternative => $expectedScore) {
+            $position = array_search($alternative, array_keys($result['scores']), true) + 1;
+            $difference = abs($result['scores'][$alternative] - $expectedScore);
+
+            $output .= sprintf(
+                "%s           %.3f          %.6f       %.6f      %d%s",
+                $alternative,
+                $expectedScore,
+                $result['scores'][$alternative],
+                $difference,
+                $position,
+                PHP_EOL,
+            );
+        }
+
+        $output .= PHP_EOL . "O ranking produzido foi exatamente:" . PHP_EOL;
+        $output .= implode(' > ', array_keys($result['scores'])) . PHP_EOL . PHP_EOL;
+        fwrite(STDOUT, $output);
     }
 
     private function assertMatrixEqualsWithDelta(array $expected, array $actual): void
