@@ -106,7 +106,7 @@
             </div>
             <h3 class="text-xl font-medium text-slate-900">Encontre o profissional ideal</h3>
             <p class="text-slate-500 mt-2 max-w-md mx-auto">Selecione uma categoria e aplique os filtros de critério
-                desejados, depois clique em "Buscar" para listar as melhores opções para você.</p>
+                desejados, depois clique em "Buscar".</p>
         </x-card>
     @else
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
