@@ -20,7 +20,7 @@ class TopsisCalculator
         // Quinto passo: Distâncias para as soluções ideais (Positiva e Negativa)
         $distances = $this->calculateDistances($weightedMatrix, $idealSolutions);
 
-        // Sexto passo: Cálcular a proximidade relativa (Score TOPSIS) e ordenar
+        // Sexto passo: Calcular a proximidade relativa (Score TOPSIS) e ordenar
         $scores = $this->calculateScores($distances);
 
         return [
